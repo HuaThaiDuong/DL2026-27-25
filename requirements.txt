@@ -1,0 +1,6 @@
+# Tested with Python 3.13 on Windows 11. The extra index provides the CUDA 13.2 builds of PyTorch;
+# without an NVIDIA GPU, delete that line to get the CPU build from PyPI.
+--extra-index-url https://download.pytorch.org/whl/cu132
+torch==2.14.1
+torchvision==0.29.1
+matplotlib==3.11.2

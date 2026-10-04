@@ -1,0 +1,8 @@
+model,technique,accuracy,size_mb,gzip_mb,params,nonzero_params,latency_ms,acc_change_pp,compression_x,speedup_x
+ResNet-18 baseline,Baseline,93.77,42.703,39.585,11173962,11173962,5.789,0.0,1.0,1.0
+ResNet-18 pruned 30%,Pruning,94.14,42.703,30.797,11173962,7826192,5.649,0.37,1.29,1.02
+ResNet-18 pruned 50%,Pruning,93.92,42.703,23.686,11173962,5594346,5.475,0.15,1.67,1.06
+ResNet-18 pruned 70%,Pruning,93.87,42.703,15.909,11173962,3362500,5.83,0.1,2.49,0.99
+ResNet-18 INT8 (PTQ),Quantization,93.79,10.783,9.435,11169162,11016363,2.459,0.02,4.2,2.35
+Student CNN baseline,Baseline,86.16,1.436,1.331,373834,373834,0.858,-7.61,29.74,6.75
+Student CNN distilled,Distillation,87.75,1.436,1.329,373834,373834,0.544,-6.02,29.79,10.64
