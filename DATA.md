@@ -3,7 +3,9 @@
 | | |
 |---|---|
 | Official URL | https://www.cs.toronto.edu/~kriz/cifar.html |
+| Direct download | https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz |
 | Version | CIFAR-10 *python version*: `cifar-10-python.tar.gz`, 170,498,071 bytes, md5 `c58f30108f718f92721af3b95e74349a` |
+| Loaded with | `torchvision` 0.29.1 (`torchvision.datasets.CIFAR10`), PyTorch 2.14.1 |
 | Reference | A. Krizhevsky, *Learning Multiple Layers of Features from Tiny Images*, Technical Report, University of Toronto, 2009 |
 | Content | 60,000 RGB images of 32×32 pixels in 10 balanced classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck |
 
@@ -24,6 +26,18 @@ train: 50000 images, per-class counts [5000, 5000, 5000, 5000, 5000, 5000, 5000,
 test: 10000 images, per-class counts [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
 ```
 
+Resulting layout (`data/` is git-ignored):
+
+```
+data/
+├── cifar-10-python.tar.gz
+└── cifar-10-batches-py/
+    ├── batches.meta
+    ├── data_batch_1 … data_batch_5
+    ├── readme.html
+    └── test_batch
+```
+
 ## Data split
 
 The official train/test split, used as is:
@@ -36,6 +50,18 @@ The official train/test split, used as is:
 There is no separate validation set. All hyperparameters are standard values fixed in advance (they were not tuned on the test set). Each model is saved after its last epoch, so no checkpoint is picked by its test accuracy.
 
 Smoke-test runs (`--debug`) use only the first 1,024 training images and the first 512 test images.
+
+## Data used by each script
+
+| Script | Data |
+|---|---|
+| [common.py](common.py) | downloads and checks both splits |
+| [train_baselines.py](train_baselines.py) | train (augmented) to train both baselines; test after every epoch |
+| [prune.py](prune.py) | train (augmented) to fine-tune the pruned models; test after every epoch |
+| [quantize.py](quantize.py) | first 500 train images (not augmented) for calibration; test for accuracy |
+| [distill.py](distill.py) | train (augmented) to train the student; test after every epoch |
+| [evaluate.py](evaluate.py) | test, for every number in the README results table |
+| [script_demo.py](script_demo.py) | 5 random test images (`--seed` fixes the choice) |
 
 ## Preprocessing
 

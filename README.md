@@ -6,6 +6,18 @@ Deep Learning course project (topic 25). A ResNet-18 trained on CIFAR-10 is comp
 - **Quantization:** post-training static INT8 quantization, calibrated on 500 images ([quantize.py](quantize.py)).
 - **Distillation:** a 0.37M-parameter CNN trained to imitate the ResNet-18 (T = 4, α = 0.5) ([distill.py](distill.py)).
 
+## 👥 Danh sách thành viên nhóm
+
+| STT | Student Code |Student fullname | Email |
+| :---: | :---: | :--- | :--- |
+| 1 | 23BI14123 | Hứa Thái Dương | duonght.23bi14123@usth.edu.vn |
+| 2 | 23BI14160 | Nguyễn Ngọc Minh Hiếu | hieunnm.23bi14160@usth.edu.vn |
+| 3 | 23BA14271 | Dương Đức Thịnh | thinhdd.23ba14271@usth.edu.vn |
+| 4 | 22BA13225 | Hồ Nguyễn Hoàng Nam | namhnh.22ba13225@usth.edu.vn |
+| 5 | 22BA13101 | Nguyễn Thái Duy | duynt.22ba13101@usth.edu.vn |
+| 6 | 22BA13064 | Hoàng Tri Đạt | datht.22ba13064@usth.edu.vn |
+| 7 | 23BA |Nguyễn Ngọc Thịnh | @usth.edu.vn |
+
 ## Run
 
 Requires Python 3.13 and an NVIDIA GPU. CIFAR-10 downloads automatically on first use (see [DATA.md](DATA.md)).
