@@ -26,7 +26,6 @@ MEAN, STD = (0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616)
 BATCH_SIZE = 128
 
 
-
 def get_parser(description):
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--debug", action="store_true",
@@ -47,7 +46,6 @@ def setup(args):
     return device, ckpt_dir, results_dir
 
 
-
 def cifar10(train, augment=False, debug=False):
     tf = [T.RandomCrop(32, padding=4), T.RandomHorizontalFlip()] if augment else []
     dataset = datasets.CIFAR10(DATA_DIR, train=train, download=True,
@@ -61,7 +59,6 @@ def loader(dataset, shuffle=False):
 
 def get_loaders(debug=False):
     return loader(cifar10(True, augment=True, debug=debug), shuffle=True), loader(cifar10(False, debug=debug))
-
 
 
 def build_teacher():
@@ -83,7 +80,6 @@ def prepare_int8(model):
     model.eval().fuse_model()
     model.qconfig = tq.get_default_qconfig("x86")
     return tq.prepare(model)
-
 
 
 def train(model, train_loader, test_loader, epochs, lr, device, loss_fn=None):
@@ -114,7 +110,6 @@ def evaluate(model, loader, device):
     with torch.inference_mode():
         correct = sum((model(x.to(device)).argmax(1).cpu() == y).sum().item() for x, y in loader)
     return 100.0 * correct / len(loader.dataset)
-
 
 
 def file_size_mb(path):
