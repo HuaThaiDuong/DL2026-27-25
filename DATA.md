@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| Official URL | https://www.cs.toronto.edu/~kriz/cifar.html |
-| Direct download | https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz |
+| Official URL | https://cave.cs.toronto.edu/kriz/cifar.html |
+| Direct download | https://cave.cs.toronto.edu/kriz/cifar-10-python.tar.gz |
 | Version | CIFAR-10 *python version*: `cifar-10-python.tar.gz`, 170,498,071 bytes, md5 `c58f30108f718f92721af3b95e74349a` |
 | Loaded with | `torchvision` 0.29.1 (`torchvision.datasets.CIFAR10`), PyTorch 2.14.1 |
 | Reference | A. Krizhevsky, *Learning Multiple Layers of Features from Tiny Images*, Technical Report, University of Toronto, 2009 |
