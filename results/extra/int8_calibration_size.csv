@@ -1,0 +1,5 @@
+calibration_images,int8_accuracy
+32,93.83
+128,93.84
+500,93.79
+2000,93.85

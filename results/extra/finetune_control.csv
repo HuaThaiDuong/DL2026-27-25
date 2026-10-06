@@ -1,0 +1,2 @@
+model,accuracy
+"ResNet-18 + 10 epochs fine-tuning, no pruning",93.99

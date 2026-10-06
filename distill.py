@@ -1,3 +1,4 @@
+"""Knowledge distillation from the ResNet-18 teacher into the compact student CNN."""
 import torch
 import torch.nn.functional as F
 

@@ -1,3 +1,4 @@
+"""Train the ResNet-18 teacher and the compact student CNN on CIFAR-10 with cross-entropy."""
 import torch
 
 from common import build_student, build_teacher, get_loaders, get_parser, setup, train

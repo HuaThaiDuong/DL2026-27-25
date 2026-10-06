@@ -1,0 +1,4 @@
+model,accuracy,size_mib,gzip_mib,latency_ms
+pruned 30% + INT8,94.01,10.784,8.191,20.387
+pruned 50% + INT8,93.87,10.784,6.542,22.308
+pruned 70% + INT8,93.91,10.784,4.374,20.994

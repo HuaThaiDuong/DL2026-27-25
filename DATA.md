@@ -62,6 +62,7 @@ Smoke-test runs (`--debug`) use only the first 1,024 training images and the fir
 | [distill.py](distill.py) | train (augmented) to train the student; test after every epoch |
 | [evaluate.py](evaluate.py) | test, for every number in the README results table |
 | [script_demo.py](script_demo.py) | 5 random test images (`--seed` fixes the choice) |
+| [report/extra_experiments.py](report/extra_experiments.py) | test for every accuracy; first 32–2,000 train images (not augmented) for INT8 calibration; train (augmented) only with `--control` |
 
 ## Preprocessing
 

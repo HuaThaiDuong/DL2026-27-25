@@ -1,0 +1,7 @@
+conv_sparsity,accuracy_before_finetune
+0.0,93.77
+0.3,93.77
+0.5,93.74
+0.7,87.94
+0.8,45.65
+0.9,10.26

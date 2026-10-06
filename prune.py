@@ -1,3 +1,4 @@
+"""Global L1 unstructured pruning of the teacher's conv weights, followed by fine-tuning."""
 import torch
 import torch.nn as nn
 import torch.nn.utils.prune as prune

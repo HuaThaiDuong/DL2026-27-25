@@ -1,0 +1,8 @@
+model,threads,rounds,median_ms,min_ms,max_ms
+ResNet-18 baseline,14,5,9.24,8.264,9.659
+ResNet-18 pruned 30%,14,5,8.831,7.168,11.06
+ResNet-18 pruned 50%,14,5,8.417,7.32,10.804
+ResNet-18 pruned 70%,14,5,8.89,6.978,10.181
+ResNet-18 INT8 (PTQ),14,5,4.331,3.029,5.378
+Student CNN baseline,14,5,0.622,0.588,0.726
+Student CNN distilled,14,5,0.627,0.592,0.939

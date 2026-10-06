@@ -1,3 +1,4 @@
+"""Post-training static INT8 quantization of the trained ResNet-18 teacher."""
 import torch
 import torch.ao.quantization as tq
 from torch.utils.data import Subset

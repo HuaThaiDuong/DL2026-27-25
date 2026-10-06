@@ -1,3 +1,4 @@
+"""Compare all saved models on accuracy, checkpoint size and CPU latency; write results/ and the README table."""
 import csv
 
 import torch
@@ -30,23 +31,23 @@ INK, INK_2, GRID, AXIS, SURFACE = "#0b0b0b", "#52514e", "#e1e0d9", "#c3c2b7", "#
 
 def markdown_report(rows):
     base = rows[0]
-    lines = ["| Model | Accuracy (%) | Δ acc (pp) | Size (MB) | gzip (MB) | Compression | Params | Non-zero "
+    lines = ["| Model | Accuracy (%) | Δ acc (pp) | Size (MiB) | gzip (MiB) | Compression | Params | Non-zero "
              "| CPU latency (ms) | Speed-up |", "|---|" + "---:|" * 9]
     for r in rows:
         lines.append(f"| {r['model']} | {r['accuracy']:.2f} | {r['acc_change_pp']:+.2f} | {r['size_mb']:.2f} "
                      f"| {r['gzip_mb']:.2f} | {r['compression_x']:.1f}× | {r['params'] / 1e6:.2f}M "
                      f"| {r['nonzero_params'] / 1e6:.2f}M | {r['latency_ms']:.2f} | {r['speedup_x']:.1f}× |")
     lines += ["", "CPU latency = one 32×32 image (batch size 1), median of 100 runs after 10 warm-up runs, "
-                  f"{torch.get_num_threads()} threads, PyTorch {torch.__version__}. MB = 2^20 bytes. "
+                  f"{torch.get_num_threads()} threads, PyTorch {torch.__version__}. MiB = 2^20 bytes. "
                   "Compression, speed-up and Δ acc are relative to the ResNet-18 baseline; compression uses the "
                   "gzip size, because pruned weights are only smaller on disk once their zeros are compressed.", ""]
 
     methods = [r for r in rows if r["technique"] != "Baseline"]
-    smaller = [r for r in methods if r["gzip_mb"] < base["gzip_mb"]]
-    if smaller:
-        best = max(smaller, key=lambda r: r["acc_change_pp"] / (base["gzip_mb"] - r["gzip_mb"]))
-        lines.append(f"- **Best accuracy retention per MB saved:** {best['model']}: {best['acc_change_pp']:+.2f} pp "
-                     f"accuracy for {base['gzip_mb'] - best['gzip_mb']:.1f} MB saved ({best['compression_x']:.1f}× smaller).")
+    close = [r for r in methods if r["acc_change_pp"] >= -0.5]
+    if close:
+        best = min(close, key=lambda r: r["gzip_mb"])
+        lines.append(f"- **Smallest model within 0.5 pp of the baseline:** {best['model']}: {best['gzip_mb']:.2f} MiB "
+                     f"gzip ({best['compression_x']:.1f}× smaller), {best['acc_change_pp']:+.2f} pp accuracy.")
     if methods:
         fast = min(methods, key=lambda r: r["latency_ms"])
         lines.append(f"- **Fastest CPU inference:** {fast['model']}: {fast['latency_ms']:.2f} ms per image, "
@@ -55,7 +56,7 @@ def markdown_report(rows):
     if len(students) == 2:
         gain = students["Student CNN distilled"]["accuracy"] - students["Student CNN baseline"]["accuracy"]
         lines.append(f"- **Distillation gain:** {gain:+.2f} pp over the same CNN trained with cross-entropy only, "
-                     "at identical size and latency.")
+                     "with identical architecture and size.")
     return "\n".join(lines)
 
 
@@ -137,7 +138,7 @@ def main():
         writer.writerows(rows)
     report = markdown_report(rows)
     (results_dir / "results.md").write_text(report + "\n", encoding="utf-8")
-    scatter_plot(rows, "gzip_mb", "Model size (MB, gzip-compressed checkpoint, log scale)",
+    scatter_plot(rows, "gzip_mb", "Model size (MiB, gzip-compressed checkpoint, log scale)",
                  "Accuracy vs. model size", results_dir / "accuracy_vs_size.png")
     scatter_plot(rows, "latency_ms", "CPU inference latency (ms per image, batch size 1, log scale)",
                  "Accuracy vs. CPU latency", results_dir / "accuracy_vs_latency.png")
