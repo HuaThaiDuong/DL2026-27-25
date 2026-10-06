@@ -1,0 +1,213 @@
+{
+  "torch_version": "2.14.1+cu132",
+  "threads": 4,
+  "test_images": 10000,
+  "checkpoints": {
+    "teacher": {
+      "file": "resnet18_baseline.pt",
+      "sha256": "d1911a08b54bb6aff71a485bebbbc83093f7cf1c7e40b9d72c028086a8319202"
+    },
+    "int8": {
+      "file": "resnet18_int8.pt",
+      "sha256": "06444828b3869af4bee19710baa856d56cab001da68980cc093d09644cc4b542"
+    },
+    "student_ce": {
+      "file": "student_baseline.pt",
+      "sha256": "2430a0a7e8136d24bd716ea955105f1247cb5c2987f33418c931288f66e66c7b"
+    },
+    "student_kd": {
+      "file": "student_distilled.pt",
+      "sha256": "2a5cafdef37db8487192339a2fbc7a8478582cddf427c9301c5ebd4046779f20"
+    }
+  },
+  "accuracy": {
+    "teacher": 93.77,
+    "int8": 93.79,
+    "student_ce": 86.17,
+    "student_kd": 87.74
+  },
+  "per_class_recall": {
+    "teacher": {
+      "airplane": 94.6,
+      "automobile": 97.6,
+      "bird": 92.0,
+      "cat": 84.6,
+      "deer": 94.5,
+      "dog": 91.2,
+      "frog": 95.3,
+      "horse": 95.4,
+      "ship": 96.5,
+      "truck": 96.0
+    },
+    "int8": {
+      "airplane": 94.9,
+      "automobile": 97.5,
+      "bird": 92.1,
+      "cat": 84.6,
+      "deer": 94.7,
+      "dog": 91.6,
+      "frog": 95.4,
+      "horse": 94.9,
+      "ship": 96.4,
+      "truck": 95.8
+    },
+    "student_ce": {
+      "airplane": 87.6,
+      "automobile": 93.0,
+      "bird": 79.0,
+      "cat": 70.7,
+      "deer": 86.3,
+      "dog": 82.6,
+      "frog": 90.4,
+      "horse": 88.0,
+      "ship": 92.7,
+      "truck": 91.4
+    },
+    "student_kd": {
+      "airplane": 89.9,
+      "automobile": 92.8,
+      "bird": 83.7,
+      "cat": 71.3,
+      "deer": 88.4,
+      "dog": 84.9,
+      "frog": 91.2,
+      "horse": 89.1,
+      "ship": 93.5,
+      "truck": 92.6
+    }
+  },
+  "largest_confusions": {
+    "teacher": [
+      {
+        "true": "cat",
+        "predicted": "dog",
+        "count": 84
+      },
+      {
+        "true": "dog",
+        "predicted": "cat",
+        "count": 56
+      },
+      {
+        "true": "truck",
+        "predicted": "automobile",
+        "count": 21
+      },
+      {
+        "true": "frog",
+        "predicted": "bird",
+        "count": 19
+      },
+      {
+        "true": "bird",
+        "predicted": "cat",
+        "count": 19
+      }
+    ],
+    "int8": [
+      {
+        "true": "cat",
+        "predicted": "dog",
+        "count": 85
+      },
+      {
+        "true": "dog",
+        "predicted": "cat",
+        "count": 54
+      },
+      {
+        "true": "truck",
+        "predicted": "automobile",
+        "count": 22
+      },
+      {
+        "true": "airplane",
+        "predicted": "ship",
+        "count": 19
+      },
+      {
+        "true": "frog",
+        "predicted": "bird",
+        "count": 19
+      }
+    ],
+    "student_ce": [
+      {
+        "true": "cat",
+        "predicted": "dog",
+        "count": 103
+      },
+      {
+        "true": "dog",
+        "predicted": "cat",
+        "count": 93
+      },
+      {
+        "true": "cat",
+        "predicted": "bird",
+        "count": 49
+      },
+      {
+        "true": "bird",
+        "predicted": "frog",
+        "count": 48
+      },
+      {
+        "true": "automobile",
+        "predicted": "truck",
+        "count": 47
+      }
+    ],
+    "student_kd": [
+      {
+        "true": "cat",
+        "predicted": "dog",
+        "count": 121
+      },
+      {
+        "true": "dog",
+        "predicted": "cat",
+        "count": 68
+      },
+      {
+        "true": "cat",
+        "predicted": "bird",
+        "count": 48
+      },
+      {
+        "true": "automobile",
+        "predicted": "truck",
+        "count": 42
+      },
+      {
+        "true": "bird",
+        "predicted": "deer",
+        "count": 38
+      }
+    ]
+  },
+  "kd_vs_ce": {
+    "kd_corrects_ce_error": 463,
+    "kd_introduces_new_error": 306,
+    "both_wrong": 920
+  },
+  "int8_vs_teacher": {
+    "int8_corrects_teacher_error": 25,
+    "int8_loses_teacher_correct": 23,
+    "disagreements": 56
+  },
+  "examples": {
+    "KD correction": [
+      32,
+      35
+    ],
+    "KD regression": [
+      37,
+      70
+    ],
+    "Shared failure": [
+      52,
+      58
+    ]
+  }
+}

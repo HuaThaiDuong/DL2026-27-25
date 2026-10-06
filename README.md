@@ -50,7 +50,6 @@ python evaluate.py
 python script_demo.py --seed 0
 ```
 
-To skip training, download the seven `.pt` files from the [v1.0 release](https://github.com/HuaThaiDuong/DL2026-27-25/releases/tag/v1.0) into `checkpoints/` and run only the last two commands.
 Accuracy and sizes are reproducible; CPU latency depends on the machine. `--debug` runs a 1-epoch smoke test on a small subset.
 
 ## Results
